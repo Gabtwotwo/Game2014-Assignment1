@@ -12,13 +12,19 @@ public class ShipController : MonoBehaviour
     //A reference to our rigid body 2d on our ship
     private Rigidbody2D rb;
 
-
+    public BulletManager bulletManager;
 
 
     private void Start()
     {
         //On start, get a reference to the rigid body component
         rb = GetComponent<Rigidbody2D>(); 
+    }
+
+    private void Update()
+    {
+        _FireBullet();
+
     }
 
     private void FixedUpdate()
@@ -50,6 +56,8 @@ public class ShipController : MonoBehaviour
             }
         }
 
+
+
         //if(rb.position.x)
     }
 
@@ -70,4 +78,16 @@ public class ShipController : MonoBehaviour
 
 
     //}
+
+    private void _FireBullet()
+    {
+        if (Input.touchCount > 0)
+        {
+            if (Time.frameCount % 40 == 0)
+            {
+                bulletManager.GetBullet(transform.position);
+            }
+        }
+    }
+    
 }
